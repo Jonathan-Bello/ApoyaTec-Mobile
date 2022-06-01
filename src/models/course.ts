@@ -1,7 +1,17 @@
+import { User } from "./User";
+
 export interface Course {
-  id: number;
-  name: string;
-  description: string;
-  date: string;
-  duration: number;
+  id          : number;
+  name        : string;
+  description : string;
+  score       : number;
+  level       : number;
+  type        : string;
+  picture     : string;
+  objective   : string;
+  knowlegde   : string;
+  target      : string;
+  user        : User;
+  created_at  : string;
+  updated_at  : string;
 }

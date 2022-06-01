@@ -35,6 +35,14 @@ const Dashboard = ({ navigation }: Props) => {
       
     }
     historial()
+    const cursosPeticion = async () => {
+      await axios.get(`https://api-apoyatec.herokuapp.com/v1/courses/filters/range/0/5`, config
+      ).then(({data}) => {
+        setCursos(data.data)
+      })
+      
+    }
+    cursosPeticion()
     
   }, [/*historical*/]);
   return (
@@ -81,8 +89,8 @@ const Dashboard = ({ navigation }: Props) => {
                 title={'HTML desde cero'}
               />*/}
               {
-              historical.map((cardHistorical) => (
-                <CarouselCard img={`${cardHistorical.class.course_id}`} title={`${cardHistorical.class.name}`} ></CarouselCard>
+              historical.map((cardHistorical, index) => (
+                <CarouselCard {...{index}} img={`${cardHistorical.class.course_id}`} title={`${cardHistorical.class.name}`} ></CarouselCard>
               ))
               }
             </ScrollView>
@@ -105,14 +113,12 @@ const Dashboard = ({ navigation }: Props) => {
                 paddingHorizontal: 16,
                 borderRadius: 8,
               }}>
-              <CardCourse
-                picture={
-                  'https://teziutlan.tecnm.mx/wp-content/uploads/slideAccesibilidad.png'
-                }
-                name={'Css desde cero'}
-                description={
-                  'fsdaaaaaaaaaaaaaaaaaaaaaasdfsadfasdsdfsdsafsad'
-                }></CardCourse>
+              {
+              cursos.map((cardCurso, index) => (
+                <CardCourse name={cardCurso.name} description={cardCurso.description} picture={cardCurso.picture} key={index} ></CardCourse>
+              ))
+              }
+              
             </View>
           </View>
         </ScrollView>

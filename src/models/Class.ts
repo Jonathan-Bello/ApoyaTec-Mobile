@@ -1,7 +1,13 @@
-export interface Cla {
-  id: number;
-  name: string;
-  notes: string;
-  urlvideo: string;
-  index: number;
+export interface Class {
+  id          : number,
+  created_at  : string,
+  updated_at  : string,
+  name        : string,
+  urlvideo    : string,
+  duration    : string,
+  views       : number,
+  notes       : string,
+  index       : number,
+  section_id  : number,
+  course_id   : number,
 }

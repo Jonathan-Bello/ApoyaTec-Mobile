@@ -5,10 +5,13 @@ import { Formik, useFormik } from 'formik';
 import { Contexto } from '../context/userContext';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../utils/RootStackParam';
-import Axios from './../../node_modules/axios/index';
+import axios from 'axios';
 import * as Yup from 'yup';
 import { Credentials } from '../models/Credentials';
 import { Button, Input } from '@rneui/base';
+import jwtDecode from 'jwt-decode';
+import { User } from '../models/User';
+
 
 type Props = StackScreenProps<RootStackParamList, 'Login'>;
 
@@ -30,12 +33,15 @@ const Login = ({ navigation }: Props) => {
   });
 
   const login = (values: any) => {
-    Axios.post(`https://api-apoyatec.herokuapp.com/v1/login`, values)
-      .then(({data}) => {
-        context.IniciarSesion({
-          jwt : data.token
-        })
-      })
+    axios.post(`https://api-apoyatec.herokuapp.com/v1/login`, values)
+      .then(async ({data}) => {
+        console.log(data.data.token);
+        
+        const idUser : User  = jwtDecode(data.data.token)
+        await context.IniciarSesion({
+          jwt : data.data.token,
+          id : idUser.id
+        })})
       .then(() => {navigation.navigate("Dashboard")})
   }
 
@@ -47,10 +53,12 @@ const Login = ({ navigation }: Props) => {
     },
     onSubmit: (values) => {
       
-      Axios.post(`${url}/login`, values)
+      axios.post(`${url}/login`, values)
       .then(({data}) => {
+        const idUser : User  = jwtDecode(data.token)
         context.IniciarSesion({
-          jwt : data.token
+          jwt : data.token,
+          id : idUser.id
         })
       })
       .then(() => {navigation.navigate("Dashboard")})

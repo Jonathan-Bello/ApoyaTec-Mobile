@@ -5,7 +5,8 @@ import { Credentials } from "../models/Credentials";
 import { OperacionesEnum, reducerSesion } from "../utils/Reducer";
 
 const CredencialesIniciales : Credentials = {
-  jwt : ''
+  jwt : '',
+  id: 0
 
 }
 

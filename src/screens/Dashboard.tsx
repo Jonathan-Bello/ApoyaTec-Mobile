@@ -9,12 +9,37 @@ import CarouselCard from '../components/Cards/CarouselCard';
 import { ScrollView } from 'react-native-gesture-handler';
 import CardCourse from '../components/Cards/CardCourse';
 import BottomBar from '../components/BottomBar/BottomBar';
+import axios from 'axios';
+import { Historical } from './../models/Historical';
+import { Course } from './../models/course';
 
 type Props = StackScreenProps<RootStackParamList, 'Dashboard'>;
 
 const Dashboard = ({ navigation }: Props) => {
   const context = useContext(Contexto);
-
+  const [token, setToken] = useState({});
+  const [historical, setHistorical] = useState<Historical[]>([]);
+  const [cursos, setCursos] = useState<Course[]>([]);
+  
+  
+  
+  
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization : context.credenciales.jwt
+      }
+    }
+    const historial = () => {
+      axios.get(`https://api-apoyatec.herokuapp.com/v1/historical/user/10/${context.credenciales.id}`, config
+      ).then(({data}) => setHistorical(data.data))
+      
+    }
+    historial()
+    
+  }, [/*historical*/]);
+  
+  console.log(historical[0].class.course_id);
   return (
     <>
       <View>
@@ -52,48 +77,17 @@ const Dashboard = ({ navigation }: Props) => {
               Ultimas clases vistas
             </Text>
             <ScrollView horizontal>
-              <CarouselCard
+              {/* <CarouselCard
                 img={
                   'https://teziutlan.tecnm.mx/wp-content/uploads/Intstruc-ver22.jpg'
                 }
                 title={'HTML desde cero'}
-              />
-              <CarouselCard
-                img={
-                  'https://teziutlan.tecnm.mx/wp-content/uploads/Intstruc-ver22.jpg'
-                }
-                title={'HTML desde cero'}
-              />
-              <CarouselCard
-                img={
-                  'https://teziutlan.tecnm.mx/wp-content/uploads/Intstruc-ver22.jpg'
-                }
-                title={'HTML desde cero'}
-              />
-              <CarouselCard
-                img={
-                  'https://teziutlan.tecnm.mx/wp-content/uploads/Intstruc-ver22.jpg'
-                }
-                title={'HTML desde cero'}
-              />
-              <CarouselCard
-                img={
-                  'https://teziutlan.tecnm.mx/wp-content/uploads/Intstruc-ver22.jpg'
-                }
-                title={'HTML desde cero'}
-              />
-              <CarouselCard
-                img={
-                  'https://teziutlan.tecnm.mx/wp-content/uploads/Intstruc-ver22.jpg'
-                }
-                title={'HTML desde cero'}
-              />
-              <CarouselCard
-                img={
-                  'https://teziutlan.tecnm.mx/wp-content/uploads/Intstruc-ver22.jpg'
-                }
-                title={'HTML desde cero'}
-              />
+              />*/}
+              {
+              historical.map((cardHistorical) => (
+                <CarouselCard img={`${cardHistorical.class.course_id}`} title={`${cardHistorical.class.name}`} ></CarouselCard>
+              ))
+              }
             </ScrollView>
           </View>
 

@@ -29,16 +29,14 @@ const Dashboard = ({ navigation }: Props) => {
         Authorization : context.credenciales.jwt
       }
     }
-    const historial = () => {
-      axios.get(`https://api-apoyatec.herokuapp.com/v1/historical/user/10/${context.credenciales.id}`, config
+    const historial = async () => {
+      await axios.get(`https://api-apoyatec.herokuapp.com/v1/historical/user/10/${context.credenciales.id}`, config
       ).then(({data}) => setHistorical(data.data))
       
     }
     historial()
     
   }, [/*historical*/]);
-  
-  console.log(historical[0].class.course_id);
   return (
     <>
       <View>

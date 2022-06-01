@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from '@rneui/themed';
 import React from 'react';
 import Index from './src/Index';
+import Navegacion from './src/utils/Navegacion';
 
 const myTheme = createTheme({
   lightColors: {
@@ -21,9 +22,9 @@ const myTheme = createTheme({
 
 const App = () => {
   return (
-    <ThemeProvider theme={myTheme}>
-      <Index />
-    </ThemeProvider>
+      <Navegacion />
+    // <ThemeProvider theme={myTheme}>
+    // </ThemeProvider>
   );
 };
 

@@ -1,4 +1,6 @@
 export type RootStackParamList = {
   Login: undefined;
-  Principal : undefined
+  Dashboard : undefined
+  Account : undefined
+  Course : undefined,
 };

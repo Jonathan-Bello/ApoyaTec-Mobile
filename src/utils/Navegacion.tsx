@@ -18,7 +18,7 @@ const Navegacion = () => {
     <NavigationContainer>
       <UserContext>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="Classes"
           screenOptions={{
             headerShown: false,
           }}>

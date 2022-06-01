@@ -8,7 +8,7 @@ import Dashboard from './../screens/Dashboard';
 import Account from './../screens/Account';
 import Course from '../screens/Course';
 import { RootStackParamList } from './RootStackParam';
-import Login from '../screens/templates/Login';
+import Login from '../screens/Login';
 
 const Navegacion = () => {
   const Stack = createStackNavigator<RootStackParamList>();

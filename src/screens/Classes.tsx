@@ -9,8 +9,8 @@ const Classes = () => {
     <>
       <Appbar />
       <ScrollView style={{ marginBottom: 80 }}>
-        <View>
-          <YoutubePlayer height={300} play={true} videoId={'84WIaK3bl_s'} />
+        <View style={{ backgroundColor: '#000' }}>
+          <YoutubePlayer height={300} play={true} videoId={'4jRHj7KdiVo'} />
         </View>
 
         <Text>VIDEIN</Text>

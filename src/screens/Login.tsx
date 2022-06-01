@@ -1,15 +1,14 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
 import Appbar from '../components/appbar/Appbar';
 import { Formik } from 'formik';
+import SvgComponent from '../assets/jsx/logo';
 
 const Login = () => {
-
-  const formik = Formik.toString()
+  const formik = Formik.toString();
   return (
     <View>
       <Appbar />
-      <Text>Login</Text>
     </View>
   );
 };

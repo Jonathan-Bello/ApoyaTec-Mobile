@@ -13,7 +13,7 @@ const Dashboard = ({navigation} : Props) => {
   return (
     <View>
       <Text>Dashboard</Text>
-      <Text>{context.credenciales.id}</Text>
+      <Text>{context.credenciales.jwt}</Text>
       {/* <Pressable onPress={() => {console.log(context.credenciales.id);
       }}><Text>Presiona aqui</Text> </Pressable> */}
     </View>

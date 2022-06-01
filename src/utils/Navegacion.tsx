@@ -18,8 +18,8 @@ const Navegacion = () => {
       {/* <UserContext> */}
         <Stack.Navigator >
           <Stack.Screen name='Login' component={Login} />
-          {/* <Stack.Screen name='Dashboard' component={Dashboard} />
-          <Stack.Screen name='Course/:id' component={Course} />
+          <Stack.Screen name='Dashboard' component={Dashboard} />
+          {/* <Stack.Screen name='Course/:id' component={Course} />
           <Stack.Screen name='Account' component={Account} /> */}
         </Stack.Navigator>
       {/* </UserContext> */}

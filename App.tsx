@@ -22,9 +22,9 @@ const myTheme = createTheme({
 
 const App = () => {
   return (
-    <ThemeProvider theme={myTheme}>
-      <Index />
-    </ThemeProvider>
+      <Navegacion />
+    // <ThemeProvider theme={myTheme}>
+    // </ThemeProvider>
   );
 };
 

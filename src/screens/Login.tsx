@@ -8,19 +8,18 @@ import { RootStackParamList } from '../utils/RootStackParam';
 import Axios from './../../node_modules/axios/index.d';
 import * as Yup from 'yup';
 
-type Props = StackScreenProps<RootStackParamList, 'Login'>
+type Props = StackScreenProps<RootStackParamList, 'Login'>;
 
-const Login = ({navigation} : Props) => {
-  const context = useContext(Contexto)
+const Login = ({ navigation }: Props) => {
+  const context = useContext(Contexto);
 
   const validaciones = Yup.object({
     correo: Yup.string()
-      .label("Correo")
+      .label('Correo')
       .email()
-      .required("El correo es requerido"),
-    contraseña : Yup.string()
-      .required("La contraseña es requerida")
-  })
+      .required('El correo es requerido'),
+    contraseña: Yup.string().required('La contraseña es requerida'),
+  });
 
   // const formik = useFormik({
   //   initialValues:{

@@ -21,7 +21,7 @@ export default BottomBar;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 16,
+    bottom: 0,
     flexDirection: 'row',
     backgroundColor: '#2E2E2E',
     width: '100%',

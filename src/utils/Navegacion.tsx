@@ -15,16 +15,16 @@ const Navegacion = () => {
   return (
     <NavigationContainer>
       <UserContext>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name='Course' component={Course} />
-        <Stack.Screen name='Account' component={Account} />
-      </Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName="Dashboard"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="Course" component={Course} />
+          <Stack.Screen name="Account" component={Account} />
+        </Stack.Navigator>
       </UserContext>
     </NavigationContainer>
   );

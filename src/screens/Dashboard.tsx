@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { Contexto } from './../context/userContext';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -6,7 +6,6 @@ import { RootStackParamList } from '../utils/RootStackParam';
 import { Credentials } from '../models/Credentials';
 import Appbar from '../components/appbar/Appbar';
 import CarouselCard from '../components/Cards/CarouselCard';
-import { ScrollView } from 'react-native-gesture-handler';
 import CardCourse from '../components/Cards/CardCourse';
 import BottomBar from '../components/BottomBar/BottomBar';
 
@@ -20,7 +19,7 @@ const Dashboard = ({ navigation }: Props) => {
       <View>
         <Appbar />
 
-        <ScrollView>
+        <ScrollView style={{ marginBottom: 80 }}>
           {/* Banner */}
           <View
             style={{

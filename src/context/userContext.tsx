@@ -17,17 +17,18 @@ interface ContextProps {
 
 export const Contexto = createContext<ContextProps>({} as ContextProps)
 
-const userContext = ({children}: any) => {
+interface Props{
+  children : JSX.Element
+}
+
+const userContext = ({children}: Props) => {
   const [state, dispatch] = useReducer(reducerSesion, CredencialesIniciales);
   const IniciarSesion = (credenciales : Credentials) => {
     dispatch({type: OperacionesEnum.Iniciar, payload: credenciales})
   }
   
   return (
-    <Contexto.Provider value={{
-      credenciales : state,
-      IniciarSesion
-    }}>
+    <Contexto.Provider value={{credenciales : state,IniciarSesion}}>
       {children}
     </Contexto.Provider>
   );

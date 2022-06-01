@@ -1,12 +1,45 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 // import Appbar from './../components/appbar/Appbar';
 import Appbar from './../components/appbar/Appbar';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
+import { Contexto } from '../context/userContext';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../utils/RootStackParam';
+import Axios from './../../node_modules/axios/index.d';
+import * as Yup from 'yup';
 
-const Login = () => {
+type Props = StackScreenProps<RootStackParamList, "Login">
 
-  const formik = Formik.toString()
+const Login = ({navigation} : Props) => {
+  const context = useContext(Contexto)
+
+  const validaciones = Yup.object({
+    correo: Yup.string()
+      .label("Correo")
+      .email()
+      .required("El correo es requerido"),
+    contraseña : Yup.string()
+      .required("La contraseña es requerida")
+  })
+
+  const formik = useFormik({
+    initialValues:{
+      correo : "",
+      contraseña : ""
+    },
+    onSubmit: (values) => {
+      Axios.post(``, values)
+        .then(({data}) => {
+          context.IniciarSesion({
+            id : data.id,
+            jwt : data.jwt
+          })
+        })
+        .then(() => {navigation.navigate("Principal")})
+    },
+    validationSchema : validaciones
+  })
   return (
     <View>
       <Appbar />

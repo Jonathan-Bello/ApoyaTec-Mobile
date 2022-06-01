@@ -10,6 +10,7 @@ import Course from '../screens/Course';
 import { RootStackParamList } from './RootStackParam';
 // import Login from '../screens/templates/Login';
 import Login from '../screens/Login';
+import Classes from '../screens/Classes';
 
 const Navegacion = () => {
   const Stack = createStackNavigator<RootStackParamList>();
@@ -17,7 +18,7 @@ const Navegacion = () => {
     <NavigationContainer>
       <UserContext>
         <Stack.Navigator
-          initialRouteName="Course"
+          initialRouteName="Classes"
           screenOptions={{
             headerShown: false,
           }}>
@@ -25,6 +26,7 @@ const Navegacion = () => {
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="Course" component={Course} />
           <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name="Classes" component={Classes} />
         </Stack.Navigator>
       </UserContext>
     </NavigationContainer>

@@ -1,6 +1,6 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { Cla } from '../../models/Class';
+import { Cla } from '../../models/IClass';
 
 const Section = (props: ISection) => {
   return (

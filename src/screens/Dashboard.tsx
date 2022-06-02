@@ -10,7 +10,7 @@ import CardCourse from '../components/Cards/CardCourse';
 import BottomBar from '../components/BottomBar/BottomBar';
 import axios from 'axios';
 import { Historical } from './../models/Historical';
-import { Course } from './../models/course';
+import { ICourse } from './../models/course';
 
 type Props = StackScreenProps<RootStackParamList, 'Dashboard'>;
 
@@ -18,10 +18,7 @@ const Dashboard = ({ navigation }: Props) => {
   const context = useContext(Contexto);
   const [token, setToken] = useState({});
   const [historical, setHistorical] = useState<Historical[]>([]);
-  const [cursos, setCursos] = useState<Course[]>([]);
-  
-  
-  
+  const [cursos, setCursos] = useState<ICourse[]>([]);
   
   useEffect(() => {
     const config = {

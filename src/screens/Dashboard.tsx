@@ -115,7 +115,9 @@ const Dashboard = ({ navigation }: Props) => {
               }}>
               {
               cursos.map((cardCurso, index) => (
-                <CardCourse name={cardCurso.name} description={cardCurso.description} picture={cardCurso.picture} key={index} ></CardCourse>
+                <CardCourse id={cardCurso.id} name={cardCurso.name} description={cardCurso.description} picture={cardCurso.picture} key={index}  nav={ () => navigation.navigate('Course', {id:cardCurso.id})
+                  
+                  }></CardCourse>
               ))
               }
               

@@ -9,7 +9,7 @@ import Section from '../components/Section/Section';
 type Props = StackScreenProps<RootStackParamList, 'Course'>;
 
 const Course = ({ navigation, route }: Props) => {
-  // const {id} = route.params
+  const {id} = route.params
   return (
     <>
       <Appbar />
@@ -19,7 +19,6 @@ const Course = ({ navigation, route }: Props) => {
             backgroundColor: '#2E2E2E',
             paddingVertical: 24,
             paddingHorizontal: 16,
-            // alignItems: 'center',
           }}>
           <Image
             style={{ width: 380, height: 250, marginBottom: 16 }}
@@ -34,7 +33,7 @@ const Course = ({ navigation, route }: Props) => {
               marginBottom: 8,
             }}>
             {' '}
-            HTML desde cero{' '}
+            HTML desde cero{`Este es el id del curso ${id}`}
           </Text>
 
           <View

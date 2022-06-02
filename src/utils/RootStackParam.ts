@@ -2,6 +2,6 @@ export type RootStackParamList = {
   Login: undefined;
   Dashboard: undefined
   Account: undefined
-  Course: undefined,
+  Course: {id: number},
   Classes: undefined,
 };

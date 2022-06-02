@@ -9,5 +9,6 @@ export interface IClass {
   notes       : string,
   index       : number,
   section_id  : number,
-  course_id   : number,
+  course_id?   : number,
+  nav?(id:number) :void
 }

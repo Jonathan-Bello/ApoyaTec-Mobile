@@ -36,7 +36,19 @@ const Course = ({ navigation, route }: Props) => {
 
     const requestSections = async () => {
       await axios.get(`https://api-apoyatec.herokuapp.com/v1/sections/course/${id}`, config)
-        .then(({data})=> {setDataSections(data.data)})
+        .then(({data})=> {
+          const sections : ISection[]= data.data
+          sections.map( s => {
+
+            let tempClasses : IClass[]
+            s.classes.map(c => {
+              let clas = c;
+              clas.nav = function()
+            })
+          })
+
+          setDataSections(data.data)}
+          )
       }
     requestSections();
 
@@ -94,6 +106,7 @@ const Course = ({ navigation, route }: Props) => {
           <View>
             {dataSections.map((sectionItem)=> (
               <Section
+              nav={()=>{}}
               title={sectionItem.name}
               classes={sectionItem.classes}></Section>
             ))}

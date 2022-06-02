@@ -1,6 +1,6 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { Cla } from '../../models/IClass';
+import { IClass } from '../../models/IClass';
 
 const Section = (props: ISection) => {
   return (
@@ -16,8 +16,8 @@ const Section = (props: ISection) => {
         {props.title}
       </Text>
       <View>
-        {props.classes.map((cla: Cla) => (
-          <Pressable key={cla.id} onPress={() => console.log()} style={{}}>
+        {props.classes.map((cla: IClass) => (
+          <Pressable key={cla.id} onPress={() => {}} style={{}}>
             <Text
               style={{
                 fontSize: 18,
@@ -38,8 +38,9 @@ const Section = (props: ISection) => {
 export default Section;
 
 interface ISection {
+  nav(id: number): void; 
   title: string;
-  classes: Cla[];
+  classes: IClass[];
 }
 
 const styles = StyleSheet.create({});

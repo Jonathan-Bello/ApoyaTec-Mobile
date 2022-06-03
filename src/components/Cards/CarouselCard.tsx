@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { useEffect, useContext } from 'react';
-import axios from "axios"
+import axios from 'axios';
 import { Contexto } from './../../context/userContext';
 interface ICarouselCard {
   img: string;
@@ -9,26 +9,29 @@ interface ICarouselCard {
 }
 
 const CarouselCard = (props: ICarouselCard) => {
-  const context = useContext(Contexto)
-  const [imagen, setImagen] = useState("");
-  
+  const context = useContext(Contexto);
+  const [imagen, setImagen] = useState('');
+
   const config = {
     headers: {
-      Authorization : context.credenciales.jwt
-    }
-  }
+      Authorization: context.credenciales.jwt,
+    },
+  };
 
   useEffect(() => {
-    
-    const peticion = () =>{ 
-      axios.get(`https://api-apoyatec.herokuapp.com/v1/courses/${props.img}`,config)
-        .then(({data}) => {setImagen(data.data.picture);
-        })
-      }
-      peticion()
+    const peticion = () => {
+      axios
+        .get(
+          `https://api-apoyatec.herokuapp.com/v1/courses/${props.img}`,
+          config,
+        )
+        .then(({ data }) => {
+          setImagen(data.data.picture);
+        });
+    };
+    peticion();
   }, []);
-  
-  
+
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={{ uri: imagen }}></Image>
@@ -37,10 +40,10 @@ const CarouselCard = (props: ICarouselCard) => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
-    alignItems : 'center',
+    alignItems: 'center',
+    marginBottom: 16,
   },
   img: {
     width: 200,

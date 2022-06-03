@@ -19,38 +19,45 @@ const Dashboard = ({ navigation }: Props) => {
   const [token, setToken] = useState({});
   const [historical, setHistorical] = useState<Historical[]>([]);
   const [cursos, setCursos] = useState<Course[]>([]);
-  
-  
-  
-  
-  useEffect(() => {
-    const config = {
-      headers: {
-        Authorization : context.credenciales.jwt
-      }
-    }
-    const historial = async () => {
-      await axios.get(`https://api-apoyatec.herokuapp.com/v1/historical/user/10/${context.credenciales.id}`, config
-      ).then(({data}) => setHistorical(data.data))
-      
-    }
-    historial()
-    const cursosPeticion = async () => {
-      await axios.get(`https://api-apoyatec.herokuapp.com/v1/courses/filters/range/0/5`, config
-      ).then(({data}) => {
-        setCursos(data.data)
-      })
-      
-    }
-    cursosPeticion()
-    
-  }, [/*historical*/]);
+
+  useEffect(
+    () => {
+      const config = {
+        headers: {
+          Authorization: context.credenciales.jwt,
+        },
+      };
+      const historial = async () => {
+        await axios
+          .get(
+            `https://api-apoyatec.herokuapp.com/v1/historical/user/10/${context.credenciales.id}`,
+            config,
+          )
+          .then(({ data }) => setHistorical(data.data));
+      };
+      historial();
+      const cursosPeticion = async () => {
+        await axios
+          .get(
+            `https://api-apoyatec.herokuapp.com/v1/courses/filters/range/0/5`,
+            config,
+          )
+          .then(({ data }) => {
+            setCursos(data.data);
+          });
+      };
+      cursosPeticion();
+    },
+    [
+      /*historical*/
+    ],
+  );
   return (
     <>
       <View>
         <Appbar />
 
-        <ScrollView style={{ marginBottom: 80 }}>
+        <ScrollView style={{ marginBottom: 200 }}>
           {/* Banner */}
           <View
             style={{
@@ -88,11 +95,12 @@ const Dashboard = ({ navigation }: Props) => {
                 }
                 title={'HTML desde cero'}
               />*/}
-              {
-              historical.map((cardHistorical, index) => (
-                <CarouselCard {...{index}} img={`${cardHistorical.class.course_id}`} title={`${cardHistorical.class.name}`} ></CarouselCard>
-              ))
-              }
+              {historical.map((cardHistorical, index) => (
+                <CarouselCard
+                  {...{ index }}
+                  img={`${cardHistorical.class.course_id}`}
+                  title={`${cardHistorical.class.name}`}></CarouselCard>
+              ))}
             </ScrollView>
           </View>
 
@@ -113,14 +121,17 @@ const Dashboard = ({ navigation }: Props) => {
                 paddingHorizontal: 16,
                 borderRadius: 8,
               }}>
-              {
-              cursos.map((cardCurso, index) => (
-                <CardCourse id={cardCurso.id} name={cardCurso.name} description={cardCurso.description} picture={cardCurso.picture} key={index}  nav={ () => navigation.navigate('Course', {id:cardCurso.id})
-                  
+              {cursos.map((cardCurso, index) => (
+                <CardCourse
+                  id={cardCurso.id}
+                  name={cardCurso.name}
+                  description={cardCurso.description}
+                  picture={cardCurso.picture}
+                  key={index}
+                  nav={() =>
+                    navigation.navigate('Course', { id: cardCurso.id })
                   }></CardCourse>
-              ))
-              }
-              
+              ))}
             </View>
           </View>
         </ScrollView>

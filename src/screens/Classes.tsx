@@ -14,7 +14,7 @@ const Classes = () => {
       <Appbar />
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={{ backgroundColor: '#000' }}>
-          <YoutubePlayer height={250} play={true} videoId={'4jRHj7KdiVo'} />
+          <YoutubePlayer height={250} play={true} videoId={'ckAJ0ZpNh1s'} />
         </View>
 
         <View

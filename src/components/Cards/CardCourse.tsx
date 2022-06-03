@@ -1,5 +1,8 @@
 import { Image, StyleSheet, Text, View, Pressable } from 'react-native';
 import React from 'react';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../../utils/RootStackParam';
+import { Contexto } from '../../context/userContext';
 
 const CardCourse = (props: ICardCourse) => {
   // const context = useContext(Contexto);

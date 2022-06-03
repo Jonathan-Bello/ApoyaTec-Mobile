@@ -10,7 +10,7 @@ import CardCourse from '../components/Cards/CardCourse';
 import BottomBar from '../components/BottomBar/BottomBar';
 import axios from 'axios';
 import { Historical } from './../models/Historical';
-import { Course } from './../models/course';
+import { ICourse } from './../models/course';
 
 type Props = StackScreenProps<RootStackParamList, 'Dashboard'>;
 
@@ -18,40 +18,30 @@ const Dashboard = ({ navigation }: Props) => {
   const context = useContext(Contexto);
   const [token, setToken] = useState({});
   const [historical, setHistorical] = useState<Historical[]>([]);
-  const [cursos, setCursos] = useState<Course[]>([]);
-
-  useEffect(
-    () => {
-      const config = {
-        headers: {
-          Authorization: context.credenciales.jwt,
-        },
-      };
-      const historial = async () => {
-        await axios
-          .get(
-            `https://api-apoyatec.herokuapp.com/v1/historical/user/10/${context.credenciales.id}`,
-            config,
-          )
-          .then(({ data }) => setHistorical(data.data));
-      };
-      historial();
-      const cursosPeticion = async () => {
-        await axios
-          .get(
-            `https://api-apoyatec.herokuapp.com/v1/courses/filters/range/0/5`,
-            config,
-          )
-          .then(({ data }) => {
-            setCursos(data.data);
-          });
-      };
-      cursosPeticion();
-    },
-    [
-      /*historical*/
-    ],
-  );
+  const [cursos, setCursos] = useState<ICourse[]>([]);
+  
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization : context.credenciales.jwt
+      }
+    }
+    const historial = async () => {
+      await axios.get(`https://api-apoyatec.herokuapp.com/v1/historical/user/10/${context.credenciales.id}`, config
+      ).then(({data}) => setHistorical(data.data))
+      
+    }
+    historial()
+    const cursosPeticion = async () => {
+      await axios.get(`https://api-apoyatec.herokuapp.com/v1/courses/filters/range/0/5`, config
+      ).then(({data}) => {
+        setCursos(data.data)
+      })
+      
+    }
+    cursosPeticion()
+    
+  }, [/*historical*/]);
   return (
     <>
       <View>

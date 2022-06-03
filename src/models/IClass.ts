@@ -1,4 +1,4 @@
-export interface Class {
+export interface IClass {
   id          : number,
   created_at  : string,
   updated_at  : string,
@@ -9,5 +9,6 @@ export interface Class {
   notes       : string,
   index       : number,
   section_id  : number,
-  course_id   : number,
+  course_id?   : number,
+  nav?(id:number) :void
 }

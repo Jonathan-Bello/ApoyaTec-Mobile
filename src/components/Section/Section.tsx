@@ -17,10 +17,15 @@ const Section = (props: ISection) => {
       </Text>
       <View>
         {props.classes.map((cla: IClass) => (
-          <Pressable key={cla.id} onPress={() => {}} style={{}}>
+          <Pressable
+            key={cla.id}
+            onPress={() => {
+              cla.nav!(cla.id);
+            }}
+            style={{}}>
             <Text
               style={{
-                fontSize: 18,
+                fontSize: 20,
                 marginBottom: 8,
                 fontStyle: 'italic',
                 paddingLeft: 16,
@@ -38,7 +43,7 @@ const Section = (props: ISection) => {
 export default Section;
 
 interface ISection {
-  nav(id: number): void; 
+  nav(id: number): void;
   title: string;
   classes: IClass[];
 }

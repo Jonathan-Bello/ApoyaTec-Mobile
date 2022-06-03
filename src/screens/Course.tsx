@@ -6,7 +6,7 @@ import Appbar from '../components/appbar/Appbar';
 import BottomBar from '../components/BottomBar/BottomBar';
 import { DuplicateIcon } from 'react-native-heroicons/outline';
 import Section from '../components/Section/Section';
-import  axios  from 'axios';
+import axios from 'axios';
 import { ICourse } from '../models/course';
 import { Contexto } from './../context/userContext';
 import { IClass } from './../models/IClass';
@@ -15,45 +15,51 @@ import { ISection } from './../models/ISection';
 type Props = StackScreenProps<RootStackParamList, 'Course'>;
 
 const Course = ({ navigation, route }: Props) => {
-  
-  const {id} = route.params
+  const { id } = route.params;
   const [dataCourse, setDataCourse] = useState<ICourse>();
   const [dataSections, setDataSections] = useState<ISection[]>([]);
   const context = useContext(Contexto);
-  
 
   useEffect(() => {
     const config = {
       headers: {
-        Authorization : context.credenciales.jwt
-      }
-    }
+        Authorization: context.credenciales.jwt,
+      },
+    };
     const requestCourses = async () => {
-      await axios.get(`https://api-apoyatec.herokuapp.com/v1/courses/${id}`, config)
-        .then(({data})=> {setDataCourse(data.data)})
-      }
+      await axios
+        .get(`https://api-apoyatec.herokuapp.com/v1/courses/${id}`, config)
+        .then(({ data }) => {
+          setDataCourse(data.data);
+        });
+    };
     requestCourses();
 
     const requestSections = async () => {
-      await axios.get(`https://api-apoyatec.herokuapp.com/v1/sections/course/${id}`, config)
-        .then(({data})=> {
-          const sections : ISection[]= data.data
-          sections.map( s => {
-
-            let tempClasses : IClass[]
-            s.classes.map(c => {
-              let clas = c;
-              clas.nav = function()
-            })
-          })
-
-          setDataSections(data.data)}
-          )
-      }
+      await axios
+        .get(
+          `https://api-apoyatec.herokuapp.com/v1/sections/course/${id}`,
+          config,
+        )
+        .then(({ data }) => {
+          const sections = asignarRoutes(data.data);
+          setDataSections(sections);
+        });
+    };
     requestSections();
+  }, []);
 
-    }, []);
-  
+  const asignarRoutes = (sections: ISection[]): ISection[] => {
+    const result = sections.map((section: ISection) => {
+      section.classes = section.classes.map((classs: IClass) => {
+        classs.nav = () => navigation.navigate('Classes', { id: classs.id });
+        return classs;
+      });
+      return section;
+    });
+    return result;
+  };
+
   return (
     <>
       <Appbar />
@@ -86,29 +92,33 @@ const Course = ({ navigation, route }: Props) => {
               marginBottom: 4,
             }}>
             <DuplicateIcon size={24} color={'#fff'} />
-            <Text style={{ color: '#fff' }}>{`Nivel: ${dataCourse?.level}`}</Text>
+            <Text
+              style={{ color: '#fff' }}>{`Nivel: ${dataCourse?.level}`}</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <DuplicateIcon size={24} color={'#fff'} />
-            <Text style={{ color: '#fff' }}>{`Puntación : ${dataCourse?.score}`}</Text>
+            <Text
+              style={{
+                color: '#fff',
+              }}>{`Puntación : ${dataCourse?.score}`}</Text>
           </View>
         </View>
 
         <View style={{ paddingVertical: 24, paddingHorizontal: 16 }}>
           <Text style={{ marginBottom: 16, fontSize: 18, fontWeight: '600' }}>
-          {`Descripción \n${dataCourse?.description}`}
-            
+            {`Descripción \n${dataCourse?.description}`}
           </Text>
           <Text style={{ fontSize: 24, fontWeight: '600', marginBottom: 24 }}>
             Temario
           </Text>
 
           <View>
-            {dataSections.map((sectionItem)=> (
+            {dataSections.map(sectionItem => (
               <Section
-              nav={()=>{}}
-              title={sectionItem.name}
-              classes={sectionItem.classes}></Section>
+                key={sectionItem.id}
+                nav={() => {}}
+                title={sectionItem.name}
+                classes={sectionItem.classes}></Section>
             ))}
           </View>
         </View>
